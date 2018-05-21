@@ -15,7 +15,7 @@ class Valuaciones extends Component {
     }
 
     componentDidMount(){
-        axios.get('http://localhost:8080/vehiculos')
+        axios.get('http://localhost:8080/vehiculos?expand=motor')
         .then(response => {
           this.setState({
             vehiculos: response.data,

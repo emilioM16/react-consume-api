@@ -24,8 +24,10 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 const columnData = [
   { id: 'marca', numeric: false, disablePadding: true, label: 'Marca' },
   { id: 'modelo', numeric: true, disablePadding: false, label: 'Modelo' },
+  { id: 'version', numeric: true, disablePadding: false, label: 'Versión' },
   { id: 'anio', numeric: true, disablePadding: false, label: 'Año' },
   { id: 'tipo', numeric: true, disablePadding: false, label: 'Tipo' },
+  { id: 'motor', numeric: true, disablePadding: false, label: 'Motor' },
   { id: 'valor', numeric: true, disablePadding: false, label: 'Valor' },
 ];
 
@@ -286,8 +288,10 @@ class EnhancedTable extends React.Component {
                       {n.marca}
                     </TableCell>
                     <TableCell numeric>{n.modelo}</TableCell>
+                    <TableCell numeric>{n.version}</TableCell>
                     <TableCell numeric>{n.anio}</TableCell>
                     <TableCell numeric>{n.tipo}</TableCell>
+                    <TableCell numeric>{n.motor.tipo + '  ' + n.motor.cilindrada}</TableCell>
                     <TableCell numeric>{n.valor}</TableCell>
                   </TableRow>
                 );
