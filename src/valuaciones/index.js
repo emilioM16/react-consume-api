@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import Tabla from '../componentes/Tabla';
 
 
 class Valuaciones extends Component {
 
-    componentDidMount() {
-        axios
-        .get("http://localhost:8080/vehiculos")
-        .then(function(response){
-            console.log(response);
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            vehiculos: [],
+        }
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
+    componentDidMount(){
+        axios.get('http://localhost:8080/vehiculos')
+        .then(response => {
+          this.setState({
+            vehiculos: response.data,
+          })
+        })
+        .catch(function(error){
+          console.log(error);
+        })
+      }
     
-    state = {}
     render() { 
         return (
             <div>
-                Valuaciones
+                <div>
+                    <h2>Valuaciones</h2>
+                </div>
+
+                <div>
+                    <Tabla vehiculos={this.state.vehiculos} />
+                </div>
+
             </div>
         )
     }
