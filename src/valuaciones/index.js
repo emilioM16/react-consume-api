@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Tabla from '../componentes/Tabla';
-
+import NuevoVehiculo from './NuevoVehiculo';
 
 class Valuaciones extends Component {
 
@@ -36,7 +36,6 @@ class Valuaciones extends Component {
                 <div>
                     <Tabla vehiculos={this.state.vehiculos} />
                 </div>
-
             </div>
         )
     }

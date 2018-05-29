@@ -18,7 +18,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
-
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import { Route, Link } from 'react-router-dom';
+import NuevoVehiculo from '../valuaciones/NuevoVehiculo';
 
 
 const columnData = [
@@ -138,18 +141,16 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>
         {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
+          <Tooltip title="Eliminar">
+            <IconButton aria-label="Eliminar">
               <DeleteIcon />
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
+          <Tooltip title="Agregar vehículo">
+            <NuevoVehiculo/>
           </Tooltip>
-        )}
+        )}        
       </div>
     </Toolbar>
   );
