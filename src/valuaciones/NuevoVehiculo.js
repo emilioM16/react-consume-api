@@ -57,6 +57,7 @@ export default class NuevoVehiculo extends React.Component {
             tipoMotor:'Naftero',
             cilindrada:'1600cc',
             open: false,
+            existe:false,
           };
         this.state = this.defaultState;
         this.handleChange = this.handleChange.bind(this);
@@ -92,18 +93,16 @@ export default class NuevoVehiculo extends React.Component {
       cilindrada:this.state.cilindrada
     }
 
-    var config = {
-
-      headers:{
-      'Access-Control-Allow-Headers':'*',
+  var headers={
+      'Access-Control-Request-Headers':'Content-Type',
       'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Credentials':'*',
-      // 'Content-Type': 'aaplication/x-www-form-urlencoded'
-    }
+      'Access-Control-Request-Method':'*',
+      // 'Content-Type': 'application/x-www-form-urlencoded'
+    
   }
 
     axios
-      .post('http://localhost:8080/vehiculos/crear',vehiculo,config)
+      .post('http://localhost:8080/vehiculos/crear',vehiculo,headers)
       .then(res => {
         console.log(res);
       })
