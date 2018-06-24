@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Tabla from '../componentes/Tabla';
-import NuevoVehiculo from './NuevoVehiculo';
 
 class Valuaciones extends Component {
 
@@ -11,20 +9,8 @@ class Valuaciones extends Component {
         this.state = {
             vehiculos: [],
         }
-        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:8080/vehiculos?expand=motor')
-        .then(response => {
-          this.setState({
-            vehiculos: response.data,
-          })
-        })
-        .catch(function(error){
-          console.log(error);
-        })
-      }
     
     render() { 
         return (

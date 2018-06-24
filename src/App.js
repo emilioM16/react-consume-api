@@ -15,13 +15,13 @@ class App extends Component {
         <AppBar color="primary" position="static">
           <Toolbar>
             <Typography variant="title" color="inherit">
-              Pistón - Agencia automotriz 
+              Agencia automotriz 
             </Typography>
             <Link to="./"><Button color="default">Inicio</Button></Link>
             <Link to="/valuaciones"><Button color="default">Valuaciones</Button></Link>
           </Toolbar>
         </AppBar>
-        
+        <img className="fondo" alt="logo" src={require('./fondo.png')}/>
  
         <Route path="/valuaciones" component={Valuaciones}/>
 

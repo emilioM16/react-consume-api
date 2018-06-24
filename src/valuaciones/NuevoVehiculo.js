@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -46,18 +45,18 @@ export default class NuevoVehiculo extends React.Component {
     constructor(props){
         super(props);
         this.defaultState = {
-            dominio:'asas',
-            marca:'Ford',
-            modelo:'Fiesta',
-            tipo:'Sedán', 
-            valor:'250000',
-            version:'sel',
-            anio:'2014',
-            nroMotor:'39128319',
-            tipoMotor:'Naftero',
-            cilindrada:'1600cc',
+            dominio:'',
+            marca:'',
+            modelo:'',
+            tipo:'', 
+            valor:'',
+            version:'',
+            anio:'',
+            nroMotor:'',
+            tipoMotor:'',
+            cilindrada:'',
             open: false,
-            existe:false,
+            noExiste:true,
           };
         this.state = this.defaultState;
         this.handleChange = this.handleChange.bind(this);
@@ -104,13 +103,24 @@ export default class NuevoVehiculo extends React.Component {
     axios
       .post('http://localhost:8080/vehiculos/crear',vehiculo,headers)
       .then(res => {
-        console.log(res);
+        this.setState({
+          noExiste : res.data.status,
+        });
+      })
+      .catch(error =>{
+        this.setState({
+          open:false,
+        })
       })
   }
 
   render() {
-    const { classes } = this.props;
-    const { valor } = this.state;
+    // const { classes } = this.props;
+    // const { valor } = this.state;
+    const errorStyle = {
+      color:'red',
+      textAlign:'center',
+    }
     return (
       <div>
         <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
@@ -278,6 +288,16 @@ export default class NuevoVehiculo extends React.Component {
                       Cancelar
                   </Button>
                 </Grid>
+              </Grid>
+
+              <Grid container spacing={16}>
+                  <Grid item>
+                    {!this.state.noExiste &&
+                      <p style={errorStyle}>
+                        El vehículo ingresado ya existe
+                      </p>
+                    }
+                  </Grid>
               </Grid>
            </ValidatorForm>
 

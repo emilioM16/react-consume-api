@@ -16,13 +16,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
-import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
-import { Route, Link } from 'react-router-dom';
 import NuevoVehiculo from '../valuaciones/NuevoVehiculo';
-
+import axios from 'axios';
 
 const columnData = [
   { id: 'marca', numeric: false, disablePadding: true, label: 'Marca' },
@@ -39,7 +35,9 @@ class EnhancedTableHead extends React.Component {
     this.props.onRequestSort(event, property);
   };
 
-
+  handleDelete = () => {
+    console.log("this.state.selected");
+  }
 
   render() {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
@@ -142,7 +140,7 @@ let EnhancedTableToolbar = props => {
       <div className={classes.actions}>
         {numSelected > 0 ? (
           <Tooltip title="Eliminar">
-            <IconButton aria-label="Eliminar">
+            <IconButton onClick={event => this.handleDelete} aria-label="Eliminar">
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -190,11 +188,26 @@ class EnhancedTable extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nuevosProps){
-    this.setState({
-      data: nuevosProps.vehiculos,
+  // componentWillReceiveProps(nuevosProps){
+  //   this.setState({
+  //     data: nuevosProps.vehiculos,
+  //   })
+  // }
+
+
+  componentDidMount(){
+    axios.get('http://localhost:8080/vehiculos?expand=motor')
+    .then(response => {
+      this.setState({
+        data: response.data,
+      })
+    })
+    .catch(function(error){
+      console.log(error);
     })
   }
+
+
 
   handleRequestSort = (event, property) => {
     const orderBy = property;
